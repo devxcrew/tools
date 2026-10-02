@@ -1,10 +1,55 @@
 {
   "name": "@devxcrew/tools",
   "version": "0.1.0",
-  "private": true,
-  "description": "Reserved for future shared tooling",
+  "description": "Shared repository maintenance and app runtime tooling",
+  "type": "module",
+  "bin": {
+    "devxcrew-tools": "bin/tools.mjs"
+  },
+  "exports": {
+    "./version": "./src/version.mjs",
+    "./changelog": "./src/changelog.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "assist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/devxcrew/tools.git"
+  },
+  "homepage": "https://github.com/devxcrew/tools#readme",
+  "bugs": {
+    "url": "https://github.com/devxcrew/tools/issues"
+  },
+  "engines": {
+    "node": ">=26.5.0",
+    "npm": ">=12.0.1"
+  },
+  "packageManager": "npm@12.0.2",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "typescript": "6.0.3"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm test && node bin/tools.mjs dependencies:order && node bin/tools.mjs check:versions && node bin/tools.mjs lines:check",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "pack": "node bin/tools.mjs pack",
+    "release:check": "npm run check && npm run format:check && npm pack --dry-run",
+    "version:show": "node bin/tools.mjs version:show",
+    "version:bump": "node bin/tools.mjs version:bump",
+    "changelog:append": "node bin/tools.mjs changelog:append",
+    "check:versions": "node bin/tools.mjs check:versions",
+    "github:now": "node bin/tools.mjs github:now",
+    "lines:check": "node bin/tools.mjs lines:check",
+    "lines:fix": "node bin/tools.mjs lines:fix"
   }
 }
