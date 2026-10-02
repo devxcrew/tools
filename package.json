@@ -1,0 +1,10 @@
+{
+  "name": "@devxcrew/tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reserved for future shared tooling",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devxcrew/tools.git"
+  }
+}
