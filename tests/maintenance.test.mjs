@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -59,6 +59,29 @@ test("dry run and invalid input leave manifests and changelog unchanged", (t) =>
   assert.throws(() => bumpVersion(root, { databaseUpdate: "Maybe" }), /Yes or No/);
   assert.equal(readFileSync(resolve(root, "package.json"), "utf8"), before);
   checkVersions(root);
+});
+
+test("agent changelog supports version bumps and append without creating assist", (t) => {
+  const root = fixture(t);
+  mkdirSync(resolve(root, "agent"));
+  writeFileSync(
+    resolve(root, "agent/CHANGELOG.md"),
+    readFileSync(resolve(root, "assist/documentation/CHANGELOG.md"))
+  );
+  rmSync(resolve(root, "assist"), { recursive: true });
+  bumpVersion(root, { title: "Agent layout", note: "Moved repository history." });
+  appendEntry(root, { title: "Verified", note: "Verified agent changelog." });
+  checkVersions(root);
+  assert.match(
+    readFileSync(resolve(root, "agent/CHANGELOG.md"), "utf8"),
+    /Verified agent changelog/
+  );
+  assert.equal(existsSync(resolve(root, "assist")), false);
+  writeFileSync(
+    resolve(root, ".devxcrew-tools.json"),
+    JSON.stringify({ maintenance: { changelogPath: "../outside.md" } })
+  );
+  assert.throws(() => checkVersions(root), /leaves repository/);
 });
 
 test("minor and major releases obey semantic versioning", () => {

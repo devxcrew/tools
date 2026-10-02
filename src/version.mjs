@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { readJson } from "./repository.mjs";
-import { changelogPath, readLatestEntry, updateChangelog } from "./changelog.mjs";
+import { changelogFile, readLatestEntry, updateChangelog } from "./changelog.mjs";
 
 export function nextVersion(current, release = "patch") {
   if (!/^\d+\.\d+\.\d+$/.test(current) || !["patch", "minor", "major"].includes(release))
@@ -20,6 +20,7 @@ export function bumpVersion(root, options = {}) {
   const manifest = readJson(root, "package.json");
   const next = nextVersion(manifest.version, options.release);
   const lock = readJson(root, "package-lock.json");
+  const changelogPath = changelogFile(root);
   const source = readFileSync(resolve(root, changelogPath), "utf8").replace(/\r\n?/g, "\n");
   const changelog = updateChangelog(source, next, options);
   const result = {
@@ -52,7 +53,7 @@ export function checkVersions(root) {
   const manifest = readJson(root, "package.json");
   const lock = readJson(root, "package-lock.json");
   const latest = readLatestEntry(root);
-  const source = readFileSync(resolve(root, changelogPath), "utf8");
+  const source = readFileSync(resolve(root, changelogFile(root)), "utf8");
   const version = manifest.version;
   if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error("Expected a numeric semantic version.");
   if (

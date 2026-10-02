@@ -1,11 +1,20 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { readJson } from "./repository.mjs";
+import { config, ownedPath, readJson } from "./repository.mjs";
 
 export const changelogPath = "assist/documentation/CHANGELOG.md";
 
+export function changelogFile(root) {
+  const configured = config(root).maintenance?.changelogPath;
+  const file =
+    configured ??
+    (existsSync(resolve(root, "agent/CHANGELOG.md")) ? "agent/CHANGELOG.md" : changelogPath);
+  ownedPath(root, file);
+  return file;
+}
+
 export function readLatestEntry(root) {
-  const source = readFileSync(resolve(root, changelogPath), "utf8");
+  const source = readFileSync(resolve(root, changelogFile(root)), "utf8");
   const match = source.match(
     /^### \[v (\d+\.\d+\.\d+)\] \d{4}-\d{2}-\d{2} \d{1,2}:\d{2} (?:am|pm) - (.+)$/m
   );
@@ -67,7 +76,7 @@ export function updateChangelog(source, version, options) {
 
 export function appendEntry(root, options) {
   const version = readJson(root, "package.json").version;
-  const file = resolve(root, changelogPath);
+  const file = resolve(root, changelogFile(root));
   const source = readFileSync(file, "utf8").replace(/\r\n?/g, "\n");
   const updated = updateChangelog(source, version, options);
   writeFileSync(file, updated);
