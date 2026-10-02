@@ -1,5 +1,19 @@
 # @devxcrew/tools
 
+App build and development paths can be configured in the root .devxcrew-tools.json:
+
+```json
+{
+  "app": {
+    "apiConfig": "src/api/tsconfig.json",
+    "webConfig": "src/web/tsconfig.json",
+    "apiEntry": "src/api/server.ts"
+  }
+}
+```
+
+Paths must exist inside the application root. Existing apps keep their original default paths.
+
 Shared maintenance for packages and apps. App creation belongs to @devxcrew/cli.
 
 ```sh

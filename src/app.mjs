@@ -3,24 +3,40 @@ import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
-import { run } from "./repository.mjs";
+import { config, ownedPath, run } from "./repository.mjs";
+
+export function appPaths(root) {
+  const paths = {
+    apiConfig: "api/tsconfig.json",
+    webConfig: "web/tsconfig.json",
+    apiEntry: "api/src/server.ts",
+    ...config(root).app
+  };
+  for (const key of ["apiConfig", "webConfig", "apiEntry"]) {
+    if (typeof paths[key] !== "string" || !existsSync(ownedPath(root, paths[key])))
+      throw new Error(`Missing application path: ${key}`);
+  }
+  return paths;
+}
 
 export function buildApp(root) {
+  const paths = appPaths(root);
   const require = createRequire(resolve(root, "package.json"));
   const output = resolve(root, "dist/api");
   if (output !== resolve(root, "dist", "api")) throw new Error("Invalid app output.");
   rmSync(output, { recursive: true, force: true });
   const compiler = require.resolve("typescript/bin/tsc");
   const vite = resolve(require.resolve("vite/package.json"), "../bin/vite.js");
-  run(root, process.execPath, [compiler, "-p", "api/tsconfig.json"]);
-  run(root, process.execPath, [compiler, "-p", "web/tsconfig.json", "--noEmit"]);
+  run(root, process.execPath, [compiler, "-p", paths.apiConfig]);
+  run(root, process.execPath, [compiler, "-p", paths.webConfig, "--noEmit"]);
   run(root, process.execPath, [vite, "build"]);
 }
 
 export function devApp(root) {
+  const paths = appPaths(root);
   const require = createRequire(resolve(root, "package.json"));
   const children = [
-    spawn(process.execPath, [require.resolve("tsx/cli"), "watch", "api/src/server.ts"], {
+    spawn(process.execPath, [require.resolve("tsx/cli"), "watch", paths.apiEntry], {
       cwd: root,
       stdio: "inherit"
     }),
