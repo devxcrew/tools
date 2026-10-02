@@ -51,3 +51,7 @@ GitHub: https://github.com/devxcrew/tools.
 Configure app.mode as single-server for a backend that serves Vite middleware. Set apiConfig, webConfig, apiEntry, envFile, and optional beforeBuild (an npm script name). Development checks one APP_HOST/APP_PORT endpoint and requires APP_URL to match. The default occupied-port policy is abort; no other app is stopped. Split-server applications retain the API_HOST/API_PORT/WEB_ORIGIN contract.
 
 Install the published tools package with an exact npm version. The allowLocalPackages option permits local testing when required. Framework and UI may use their current @codexsun names. Configure boundaries.compilerPackage when the consuming TypeScript compiler has no JavaScript parser API, and list only intentional tooling imports in boundaries.developmentPackages.
+
+## Common governance MCP
+
+Use npm run mcp:connect for read-only repository, UI, and code guidance. It continues offline using the guides in assist/governance. Configure the connection through .env.example. See assist/GOVERNANCE.md for headers and client setup. This command is independent of application startup and verification.

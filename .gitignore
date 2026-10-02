@@ -5,3 +5,6 @@ dist/
 .idea/
 .vscode/
 .vite/
+.env
+.env.*
+!.env.example

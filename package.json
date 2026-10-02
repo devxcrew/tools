@@ -1,6 +1,6 @@
 {
   "name": "@devxcrew/tools",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Shared repository maintenance and app runtime tooling",
   "type": "module",
   "bin": {
@@ -50,7 +50,9 @@
     "check:versions": "node bin/tools.mjs check:versions",
     "github:now": "node bin/tools.mjs github:now",
     "lines:check": "node bin/tools.mjs lines:check",
-    "lines:fix": "node bin/tools.mjs lines:fix"
+    "lines:fix": "node bin/tools.mjs lines:fix",
+    "mcp:connect": "node assist/mcp-connect.mjs",
+    "mcp:verify": "node assist/mcp-connect.mjs --strict"
   },
   "dependencies": {
     "dotenv": "17.4.2"

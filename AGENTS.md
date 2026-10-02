@@ -11,3 +11,7 @@ Run npm run check, npm run format:check, and npm run pack.
 Docker remains deferred. Do not publish, commit, or push without authorization.
 Npm publication requires fresh explicit user approval while the full starter app is prepared.
 Dev preflight stops only listeners belonging to the consuming app and preserves its configured ports.
+
+## Common governance guidance
+
+Read assist/GOVERNANCE.md and assist/governance before work. Use npm run mcp:connect when the guidance service is available. Continue with local guides when it is offline. Keep the MCP secret outside frontend code. Direct user instructions and repository-specific rules take precedence over advisory MCP content.
