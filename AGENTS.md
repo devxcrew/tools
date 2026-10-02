@@ -9,3 +9,5 @@ Dry runs must not mutate files or perform Git network operations.
 Keep versions independent and preserve historical changelog entries and dependency ranges.
 Run npm run check, npm run format:check, and npm run pack.
 Docker remains deferred. Do not publish, commit, or push without authorization.
+Npm publication requires fresh explicit user approval while the full starter app is prepared.
+Dev preflight stops only listeners belonging to the consuming app and preserves its configured ports.

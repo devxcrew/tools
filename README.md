@@ -17,7 +17,7 @@ Paths must exist inside the application root. Existing apps keep their original 
 Shared maintenance for packages and apps. App creation belongs to @devxcrew/cli.
 
 ```sh
-npm install --save-dev --save-exact @devxcrew/tools@0.1.0
+npm install --save-dev --save-exact @devxcrew/tools
 npm exec -- devxcrew-tools help
 ```
 
@@ -29,6 +29,14 @@ GitHub dry runs do not stage, commit, fetch, or push.
 Version bumps preserve dependency ranges and historical entries.
 LF checks skip generated files, dependency trees, secrets, and symlinks.
 Environment initialization preserves existing files and creates unique cookie secrets.
+Application development preflight reads API_HOST, API_PORT and WEB_ORIGIN from the app root .env.
+It stops existing processes belonging to that app and restarts on the same reserved ports.
+It does not select another port or stop processes belonging to another app.
+Set DEVXCREW_DEV_PORT_POLICY=abort to reject occupied ports without stopping a process.
+GitHub review uses the CXApp review box and version, message and approval prompts.
+Windows IDE runs use native review dialogs when terminal input is unavailable.
+An approved run fetches, pulls with rebase and autostash when needed, commits changes, and pushes.
+Cancellation leaves versions and Git state unchanged. Dry runs perform no Git network operations.
 Container preparation copies build context only. It never starts Docker.
 
 Dependency order: tools -> framework/UI -> platform -> CLI -> apps.

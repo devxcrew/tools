@@ -1,6 +1,6 @@
 {
   "name": "@devxcrew/tools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Shared repository maintenance and app runtime tooling",
   "type": "module",
   "bin": {
@@ -51,5 +51,8 @@
     "github:now": "node bin/tools.mjs github:now",
     "lines:check": "node bin/tools.mjs lines:check",
     "lines:fix": "node bin/tools.mjs lines:fix"
+  },
+  "dependencies": {
+    "dotenv": "17.4.2"
   }
 }

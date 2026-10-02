@@ -36,7 +36,7 @@ try {
       buildApp(root);
       break;
     case "app:dev":
-      devApp(root);
+      await devApp(root);
       break;
     case "env:init":
       initializeEnvironment(root);

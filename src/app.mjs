@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { config, ownedPath, run } from "./repository.mjs";
+import { devSettings, preflightPorts, stopProcessTree } from "./preflight.mjs";
 
 export function appPaths(root) {
   const paths = {
@@ -32,24 +33,45 @@ export function buildApp(root) {
   run(root, process.execPath, [vite, "build"]);
 }
 
-export function devApp(root) {
+export async function devApp(root) {
   const paths = appPaths(root);
+  const settings = devSettings(root);
+  console.info("\n  > Application preflight");
+  await preflightPorts(root, [settings.api, settings.web], settings.policy);
   const require = createRequire(resolve(root, "package.json"));
   const children = [
-    spawn(process.execPath, [require.resolve("tsx/cli"), "watch", paths.apiEntry], {
+    spawn(process.execPath, [require.resolve("tsx/cli"), "watch", resolve(root, paths.apiEntry)], {
       cwd: root,
       stdio: "inherit"
     }),
-    spawn(process.execPath, [resolve(require.resolve("vite/package.json"), "../bin/vite.js")], {
-      cwd: root,
-      stdio: "inherit"
-    })
+    spawn(
+      process.execPath,
+      [
+        resolve(require.resolve("vite/package.json"), "../bin/vite.js"),
+        "--host",
+        settings.web.host,
+        "--port",
+        String(settings.web.port),
+        "--strictPort"
+      ],
+      {
+        cwd: root,
+        stdio: "inherit"
+      }
+    )
   ];
   let stopping = false;
   function stop(code = 0) {
     if (stopping) return;
     stopping = true;
-    for (const child of children) child.kill();
+    for (const child of children) {
+      if (child.exitCode !== null || !child.pid) continue;
+      try {
+        stopProcessTree(child.pid);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
     process.exitCode = code;
   }
   for (const child of children) {

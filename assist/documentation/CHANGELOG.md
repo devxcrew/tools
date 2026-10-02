@@ -2,11 +2,24 @@
 
 ## Version State
 
-Current version: 0.1.1
+Current version: 0.1.2
 
-Release tag: v-0.1.1
+Release tag: v-0.1.2
 
-Changelog label: v 0.1.1
+Changelog label: v 0.1.2
+
+## v-0.1.2
+
+### [v 0.1.2] 2026-10-02 3:10 pm - App preflight and CXApp GitHub review
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Restart existing app process trees on configured reserved ports and preserve cross-app ownership. Match CXApp GitHub review prompts, support Windows IDE dialogs, and pull approved upstream changes before committing.
+- Passed 15 tests, release checks, packaging, and live same-port restart verification. The user approved commit, push, and npm publication for this tools release.
 
 ## v-0.1.1
 
