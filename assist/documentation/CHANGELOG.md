@@ -2,11 +2,23 @@
 
 ## Version State
 
-Current version: 0.1.2
+Current version: 0.1.3
 
-Release tag: v-0.1.2
+Release tag: v-0.1.3
 
-Changelog label: v 0.1.2
+Changelog label: v 0.1.3
+
+## v-0.1.3
+
+### [v 0.1.3] 2026-10-02 8:29 pm - Audited tools and application compatibility
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Added single-server application support, TypeScript compiler compatibility, initial GitHub pushes, configured environment preflight, and generated-file exclusions. Reviewed shared maintenance commands for Cxsun, framework, UI, and UIUX. Passed 20 tests, release checks, formatting checks, and npm packaging.
 
 ## v-0.1.2
 

@@ -14,7 +14,7 @@ App build and development paths can be configured in the root .devxcrew-tools.js
 
 Paths must exist inside the application root. Existing apps keep their original default paths.
 
-Shared maintenance for packages and apps. App creation belongs to @devxcrew/cli.
+Shared maintenance for packages and apps. App creation belongs to the owning application setup.
 
 ```sh
 npm install --save-dev --save-exact @devxcrew/tools
@@ -39,9 +39,15 @@ An approved run fetches, pulls with rebase and autostash when needed, commits ch
 Cancellation leaves versions and Git state unchanged. Dry runs perform no Git network operations.
 Container preparation copies build context only. It never starts Docker.
 
-Dependency order: tools -> framework/UI -> platform -> CLI -> apps.
+Dependency order: tools -> framework/UI -> platform -> apps.
 An owner can consume only earlier layers. Apps use tools directly after creation.
-Tools has no dependency on framework, UI, platform, CLI, or an app.
+Tools has no dependency on framework, UI, platform, or an app.
 
 Source: D:\codexsun\shared\tools.
 GitHub: https://github.com/devxcrew/tools.
+
+## Single server applications
+
+Configure app.mode as single-server for a backend that serves Vite middleware. Set apiConfig, webConfig, apiEntry, envFile, and optional beforeBuild (an npm script name). Development checks one APP_HOST/APP_PORT endpoint and requires APP_URL to match. The default occupied-port policy is abort; no other app is stopped. Split-server applications retain the API_HOST/API_PORT/WEB_ORIGIN contract.
+
+Install the published tools package with an exact npm version. The allowLocalPackages option permits local testing when required. Framework and UI may use their current @codexsun names. Configure boundaries.compilerPackage when the consuming TypeScript compiler has no JavaScript parser API, and list only intentional tooling imports in boundaries.developmentPackages.

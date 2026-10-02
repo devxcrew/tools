@@ -12,7 +12,7 @@ export function build(root) {
   rmSync(output, { recursive: true, force: true });
   mkdirSync(output, { recursive: true });
   const require = createRequire(resolve(root, "package.json"));
-  const compiler = require.resolve("typescript/bin/tsc");
+  const compiler = resolve(require.resolve("typescript/package.json"), "../bin/tsc");
   run(root, process.execPath, [compiler, "-p", settings.build.tsconfig ?? "tsconfig.json"]);
   for (const file of settings.build.assets ?? []) {
     const source = ownedPath(root, `src/${file}`);

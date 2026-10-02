@@ -83,3 +83,32 @@ test("GitHub prompts cancel without bumping and pull before committing approved 
   assert.equal(git(root, ["log", "-1", "--format=%s"]), "#79 - Initial package");
   assert.equal(git(root, ["rev-list", "--count", "HEAD..origin/main"]), "0");
 });
+
+test("GitHub tooling bootstraps an empty remote and unborn main branch", async (t) => {
+  const directory = mkdtempSync(join(tmpdir(), "tools-first-push-"));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const root = join(directory, "app");
+  mkdirSync(join(root, "assist/documentation"), { recursive: true });
+  writeFileSync(join(root, "package.json"), JSON.stringify({ name: "fixture", version: "0.1.0" }));
+  writeFileSync(
+    join(root, "package-lock.json"),
+    JSON.stringify({ version: "0.1.0", packages: { "": { version: "0.1.0" } } })
+  );
+  writeFileSync(
+    join(root, "assist/documentation/CHANGELOG.md"),
+    "Current version: 0.1.0\nRelease tag: v-0.1.0\nChangelog label: v 0.1.0\n### [v 0.1.0] 2026-10-02 8:15 pm - Initial repository\n"
+  );
+  const git = (cwd, args) =>
+    execFileSync("git", args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
+  git(root, ["init", "--quiet", "-b", "main"]);
+  git(root, ["config", "user.name", "Tool test"]);
+  git(root, ["config", "user.email", "tools@example.invalid"]);
+  const remote = join(directory, "remote.git");
+  git(directory, ["init", "--quiet", "--bare", remote]);
+  git(root, ["remote", "add", "origin", remote]);
+  const replies = ["no", "", "yes"];
+  await githubNow(root, { ask: async (_query, fallback) => replies.shift() || fallback || "" });
+  assert.equal(git(root, ["rev-parse", "--abbrev-ref", "@{upstream}"]), "origin/main");
+  assert.equal(git(root, ["status", "--porcelain"]), "");
+  assert.equal(git(root, ["rev-list", "--count", "HEAD..origin/main"]), "0");
+});

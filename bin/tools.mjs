@@ -6,7 +6,7 @@ import { normalizeLines } from "../src/lines.mjs";
 import { appendEntry, readLatestEntry } from "../src/changelog.mjs";
 import { bumpVersion, checkVersions } from "../src/version.mjs";
 import { githubNow } from "../src/github.mjs";
-import { readJson, readOptions } from "../src/repository.mjs";
+import { readJson, readOptions, config } from "../src/repository.mjs";
 import { buildApp, devApp, initializeEnvironment } from "../src/app.mjs";
 import { checkDependencyOrder } from "../src/dependency-order.mjs";
 import { prepareContainer } from "../src/container.mjs";
@@ -29,7 +29,7 @@ try {
       await verifyClone(root);
       break;
     case "dependencies:order":
-      checkDependencyOrder(readJson(root, "package.json"));
+      checkDependencyOrder(readJson(root, "package.json"), config(root));
       console.info("Dependency order passed.");
       break;
     case "app:build":

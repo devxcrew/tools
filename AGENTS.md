@@ -1,8 +1,8 @@
 # Tools agent rules
 
 Own shared maintenance, builds, application runtime helpers, and package verification.
-App creation and templates stay in @devxcrew/cli.
-Never import framework, UI, platform, CLI, or app implementations here.
+App creation and templates stay with their owning applications.
+Never import framework, UI, platform, or app implementations here.
 Use .devxcrew-tools.json and public npm dependencies.
 Use argument-based child processes. Do not build shell commands from user text.
 Dry runs must not mutate files or perform Git network operations.

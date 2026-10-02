@@ -23,10 +23,13 @@ export async function githubNow(root, { dryRun = false, ask } = {}) {
   }
   const branch = git(["symbolic-ref", "--short", "HEAD"], true);
   let upstream;
+  let firstPush = false;
   try {
     upstream = git(["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"], true);
   } catch {
-    throw new Error(`Configure a remote and upstream for ${branch} before running github:now.`);
+    git(["remote", "get-url", "origin"], true);
+    upstream = `origin/${branch}`;
+    firstPush = true;
   }
   await withGithubPrompt(async (ask) => {
     const answer = await ask("  Bump next version before commit? [y/N]: ");
@@ -52,8 +55,22 @@ export async function githubNow(root, { dryRun = false, ask } = {}) {
       return;
     }
     git(["fetch", "--quiet"]);
-    const behind = Number(git(["rev-list", "--count", `HEAD..${upstream}`], true));
-    if (behind) git(["pull", "--rebase", "--autostash"]);
+    let remoteExists = false;
+    let headExists = false;
+    try {
+      git(["rev-parse", "--verify", "--quiet", upstream], true);
+      remoteExists = true;
+    } catch {}
+    try {
+      git(["rev-parse", "--verify", "--quiet", "HEAD"], true);
+      headExists = true;
+    } catch {}
+    if (remoteExists && !headExists)
+      throw new Error("Remote branch already contains history. Clone it before the initial push.");
+    const behind = remoteExists
+      ? Number(git(["rev-list", "--count", `HEAD..${upstream}`], true))
+      : 0;
+    if (behind) git(["pull", "--rebase", "--autostash", ...(firstPush ? ["origin", branch] : [])]);
     if (git(["diff", "--name-only", "--diff-filter=U"], true))
       throw new Error("Pull left conflicts. Resolve them before staging or committing.");
     if (readLatestEntry(root).version !== latest.version)
@@ -62,7 +79,7 @@ export async function githubNow(root, { dryRun = false, ask } = {}) {
     git(["add", "-A"]);
     if (git(["diff", "--cached", "--name-only"], true)) git(["commit", "-m", subject]);
     else console.info("  No changes to commit.");
-    git(["push"]);
+    git(firstPush ? ["push", "--set-upstream", "origin", branch] : ["push"]);
     console.info(`Committed and pushed ${subject}. No release tag was created.`);
   }, ask);
 }

@@ -82,6 +82,10 @@ test("line fixer changes text, ignores generated files and secrets, and rejects 
   mkdirSync(resolve(root, "node_modules"));
   writeFileSync(resolve(root, "README.md"), "one\r\ntwo\rthree\n");
   writeFileSync(resolve(root, "node_modules/generated.md"), "untouched\r\n");
+  for (const directory of [".idea", ".vscode", ".vite"]) {
+    mkdirSync(resolve(root, directory));
+    writeFileSync(resolve(root, directory, "generated.json"), "untouched\r\n");
+  }
   writeFileSync(resolve(root, ".env"), "secret=untouched\r\n");
   writeFileSync(resolve(root, "image.png"), Buffer.from([0, 13, 10, 255]));
   assert.throws(() => normalizeLines(root, false), /Non-LF/);

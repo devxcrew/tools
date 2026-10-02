@@ -3,9 +3,27 @@ import { createServer } from "node:net";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "dotenv";
+import { config, ownedPath } from "./repository.mjs";
 
 export function devSettings(root) {
-  const env = parse(readFileSync(resolve(root, ".env")));
+  const settings = config(root);
+  const env = parse(readFileSync(ownedPath(root, settings.app?.envFile ?? ".env")));
+  if (settings.app?.mode === "single-server") {
+    const origin = new URL(env.APP_URL);
+    const endpoint = {
+      host: env.APP_HOST || origin.hostname.replace(/^\[|\]$/g, ""),
+      port: portNumber(env.APP_PORT)
+    };
+    if (
+      !["http:", "https:"].includes(origin.protocol) ||
+      Number(origin.port || (origin.protocol === "https:" ? 443 : 80)) !== endpoint.port
+    )
+      throw new Error("APP_URL must match APP_PORT.");
+    const policy = env.DEVXCREW_DEV_PORT_POLICY ?? "abort";
+    if (!["restart", "abort"].includes(policy))
+      throw new Error("Invalid DEVXCREW_DEV_PORT_POLICY.");
+    return { endpoints: [endpoint], policy };
+  }
   const origin = new URL(env.WEB_ORIGIN);
   if (!["http:", "https:"].includes(origin.protocol)) throw new Error("Invalid WEB_ORIGIN.");
   const api = { host: env.API_HOST, port: portNumber(env.API_PORT) };

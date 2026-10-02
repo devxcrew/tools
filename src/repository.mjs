@@ -27,6 +27,9 @@ export function config(root) {
 export function sourceFiles(root) {
   const ignored = new Set([
     ".git",
+    ".idea",
+    ".vscode",
+    ".vite",
     "node_modules",
     "dist",
     "vendor",

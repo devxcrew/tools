@@ -5,7 +5,10 @@ import { checkDependencyOrder } from "../src/dependency-order.mjs";
 test("shared packages reject reverse edges, cycles and obsolete npm names", () => {
   assert.throws(
     () =>
-      checkDependencyOrder({ name: "@devxcrew/tools", dependencies: { "@devxcrew/cli": "1.0.0" } }),
+      checkDependencyOrder({
+        name: "@devxcrew/tools",
+        dependencies: { "@devxcrew/platform": "1.0.0" }
+      }),
     /Reverse/
   );
   assert.throws(
@@ -39,5 +42,19 @@ test("shared packages reject reverse edges, cycles and obsolete npm names", () =
     peerDependencies: { "@devxcrew/framework": "^1.0.80" },
     devDependencies: { "@devxcrew/tools": "0.1.0" }
   });
-  checkDependencyOrder({ name: "@devxcrew/cli", dependencies: { "@devxcrew/tools": "0.1.0" } });
+  checkDependencyOrder({
+    name: "@devxcrew/platform",
+    dependencies: { "@devxcrew/tools": "0.1.0" }
+  });
+});
+
+test("Codexsun apps can opt into local shared packages", () => {
+  checkDependencyOrder(
+    {
+      name: "@codexsun/cxsun",
+      devDependencies: { "@devxcrew/tools": "file:../tools" },
+      dependencies: { "@codexsun/ui": "file:../ui" }
+    },
+    { allowLocalPackages: true }
+  );
 });

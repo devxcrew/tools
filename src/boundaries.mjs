@@ -7,11 +7,16 @@ import { checkDependencyOrder } from "./dependency-order.mjs";
 
 export function checkBoundaries(root) {
   const manifest = readJson(root, "package.json");
-  checkDependencyOrder(manifest);
   const settings = config(root);
+  checkDependencyOrder(manifest, settings);
   const allowed = new Set(Object.keys({ ...manifest.dependencies, ...manifest.peerDependencies }));
+  for (const name of settings.boundaries?.developmentPackages ?? []) {
+    if (!manifest.devDependencies?.[name])
+      throw new Error(`Undeclared development package ${name}`);
+    allowed.add(name);
+  }
   const require = createRequire(resolve(root, "package.json"));
-  const ts = require("typescript");
+  const ts = require(settings.boundaries?.compilerPackage ?? "typescript");
   const roots = settings.boundaries?.sources ?? ["src"];
   const forbidden = settings.boundaries?.forbiddenPackages ?? ["@cxapp/"];
   for (const file of sourceFiles(root)) {
