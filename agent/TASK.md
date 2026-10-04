@@ -37,23 +37,23 @@ Parents retain incomplete acceptance gates. Mail tests and production deployment
 
 ### Phase 02 - Public contracts and release scope
 
-- [ ] **02.05 Define generation and supported runtime contracts** - in-review. Owner: tools, template.
+- [x] **02.05 Define generation and supported runtime contracts** - accepted. Owner: tools, template.
   - [x] 02.05.1 Explicit artifact manifest, tokens and overwrite policy implemented.
   - [x] 02.05.2 Accept Node 26.10/npm 12.2 on Windows, Linux and macOS; reject destination overwrite and document explicit migration.
   - [x] 02.05.3 Verify Linux/macOS runtime matrix in CI (Tools run 37202224447).
 
 ### Phase 05 - Tools, guidance and delivery
 
-- [ ] **05.02 Refine setup, diagnostics and lifecycle commands** - in-review. Owner: tools.
+- [x] **05.02 Refine setup, diagnostics and lifecycle commands** - accepted. Owner: tools.
   - [x] 05.02.1 32 Tools tests cover safe paths, ports, boundaries and generation.
   - [x] 05.02.2 Verify actual killed-process interruption and complete retry.
-  - [ ] 05.02.3 Verify cross-platform matrix and released consumers.
+  - [x] 05.02.3 Verify cross-platform matrix and released consumers.
 
 ### Phase 07 - Release and app generation
 
-- [ ] **07.01 Generate apps from accepted released contracts** - in-review. Owner: tools, template.
+- [x] **07.01 Generate apps from accepted released contracts** - accepted. Owner: tools, template.
   - [x] 07.01.1 Safe app:create and exporter with three regression tests implemented.
-  - [ ] 07.01.2 Build approved registry artifact and verify generated application installation.
+  - [x] 07.01.2 Build approved registry artifact and verify generated application installation.
 - [ ] **07.02 Verify generation safety and upgrades** - in-review. Owner: tools, template.
   - [x] 07.02.1 Existing destination and private artifact rejection tests pass.
   - [x] 07.02.2 Verify killed-process interruption, rejected in-place upgrades and preservation of app-owned modules.
@@ -168,3 +168,7 @@ Release title: Deliver reusable application tooling.
 Add safe application creation, artifact validation, interruption recovery, upgrade preservation and maintenance verification.
 Update version records, review release checks, then commit and push the current owner branch.
 Preserve existing task history and incomplete acceptance gates.
+
+## Registry consumer acceptance - 2026-10-04
+
+Two independent generated apps passed exact registry installation, application verification, module boundaries and live SQLite checks. Cross-app session denial passed. Cxsun three-OS CI passed in run 37204145628. See projects/cxsun/agent/GENERATED-CONSUMERS.json and RELEASE-PACKAGES.json. Browser acceptance and future version upgrade rehearsal remain separate.
