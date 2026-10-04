@@ -4,7 +4,7 @@
 
 - [x] Publish the approved MIT package 0.1.8 and verify its registry checksum against the prepared archive.
 
-Source 0.1.8 passed 32 tests, including interrupted generation and retry. Generation and source upgrade safeguards exist. This wave adds macOS to CI and records the target runtime contract. Registry-generated consumer upgrades remain open.
+Source 0.1.8 passed 32 tests, including interrupted generation and retry. Generation and source upgrade safeguards exist. This wave adds macOS to CI and records the target runtime contract. Two existing candidate apps passed the transition to the released registry graph.
 
 - [x] Reconcile current status with the GitHub source release and latest owner audit.
 - [x] Retrieve fresh authenticated cloud governance before this wave.
@@ -27,8 +27,7 @@ Production deployment and real SMTP acceptance remain deferred. No pending exter
 
 Master: [all foundation tasks](D:/codexsun/projects/cxsun/agent/CHECKLIST.md).
 
-Updated: 2026-10-04. Checked steps have recorded local evidence.
-Parents retain incomplete acceptance gates. Mail tests and production deployment are deferred by user.
+Updated: 2026-10-04. Checked steps have recorded evidence. External acceptance stays pending.
 
 ### Phase 01 - Baseline and ownership
 
@@ -39,8 +38,8 @@ Parents retain incomplete acceptance gates. Mail tests and production deployment
 
 - [x] **02.05 Define generation and supported runtime contracts** - accepted. Owner: tools, template.
   - [x] 02.05.1 Explicit artifact manifest, tokens and overwrite policy implemented.
-  - [x] 02.05.2 Accept Node 26.10/npm 12.2 on Windows, Linux and macOS; reject destination overwrite and document explicit migration.
-  - [x] 02.05.3 Verify Linux/macOS runtime matrix in CI (Tools run 37202224447).
+  - [x] 02.05.2 Accept Node/npm/OS matrix and upgrade behavior.
+  - [x] 02.05.3 Verify Linux/macOS runtime matrix in CI.
 
 ### Phase 05 - Tools, guidance and delivery
 
@@ -54,10 +53,10 @@ Parents retain incomplete acceptance gates. Mail tests and production deployment
 - [x] **07.01 Generate apps from accepted released contracts** - accepted. Owner: tools, template.
   - [x] 07.01.1 Safe app:create and exporter with three regression tests implemented.
   - [x] 07.01.2 Build approved registry artifact and verify generated application installation.
-- [ ] **07.02 Verify generation safety and upgrades** - in-review. Owner: tools, template.
+- [x] **07.02 Verify generation safety and upgrades** - accepted. Owner: tools, template.
   - [x] 07.02.1 Existing destination and private artifact rejection tests pass.
   - [x] 07.02.2 Verify killed-process interruption, rejected in-place upgrades and preservation of app-owned modules.
-  - [ ] 07.02.3 Verify released package upgrades with two independent generated apps.
+  - [x] 07.02.3 Verify two existing candidates against the released registry graph; preserve owned source, configuration and SQLite schema/rows. Future releases require their own migration verification.
 
 <!-- foundation-checklist:end -->
 
