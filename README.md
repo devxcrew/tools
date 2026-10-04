@@ -54,3 +54,14 @@ Run `devxcrew-tools app:doctor --root <app>` to check configured paths, source b
 This command does not reveal environment values. Version ranges still require installation and release compatibility checks.
 The generator does not install packages or claim generated-app runtime acceptance.
 Live SQLite acceptance requires the completed compatible Cxsun release artifact.
+
+## Foundation runtime support
+
+The coordinated foundation targets Node 26.10.0 and npm 12.2.0 for acceptance.
+Package engine ranges remain minimum requirements, not claims that every allowed version has been tested.
+CI exercises Windows, Linux, and macOS at the target versions.
+Support is accepted only after that operating system's source checks and generated-consumer checks pass.
+Generation rejects an existing destination. Upgrade into an existing app is not supported.
+Generate into a new directory, review changes, and preserve app-owned modules during an explicit migration.
+Do not treat a source checkout run as acceptance of unpublished registry packages.
+The MIT license covers first-party code. Dependencies retain their own license terms.

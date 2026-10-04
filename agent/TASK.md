@@ -1,4 +1,23 @@
-# Current foundation tasks
+# Current task
+
+## Completion wave - 2026-10-04
+
+Source 0.1.8 passed 32 tests, including interrupted generation and retry. Generation and source upgrade safeguards exist. This wave adds macOS to CI and records the target runtime contract. Registry-generated consumer upgrades remain open.
+
+- [x] Reconcile current status with the GitHub source release and latest owner audit.
+- [x] Retrieve fresh authenticated cloud governance before this wave.
+- [x] Apply the user-selected MIT license to first-party source, package metadata and lock metadata.
+- [x] Record this wave's affected checks and accept only gates with direct evidence.
+
+npm run release:check passed 32 tests, format, metadata and a 21-file MIT package.
+
+- [x] Prepare isolated CI coverage for the target Windows/Linux/macOS runtime.
+- [ ] Verify this wave's exact GitHub CI results.
+
+Use projects/cxsun/agent/REMAINING-WORK.md for ordered cross-owner dependencies.
+Production deployment and real SMTP acceptance remain deferred. No pending external gate is marked complete.
+
+## Prior records
 
 <!-- foundation-checklist:start -->
 
