@@ -167,3 +167,6 @@ Authenticated MCP passed before work. New or expanded three-OS CI requires actua
 ## macOS CI fixture correction - 2026-10-04
 
 The macOS generation tests used the system temporary-directory alias. Canonicalized the fixture root with realpathSync. The generator still rejects symlinked destination parents. Local release:check passes 32 tests. The replacement three-OS CI run is required before support acceptance.
+
+
+Three-OS source CI passed: GitHub Actions run 37202224447 on Node 26.10.0 and npm 12.2.0.

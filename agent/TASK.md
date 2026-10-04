@@ -2,6 +2,8 @@
 
 ## Completion wave - 2026-10-04
 
+- [x] Publish the approved MIT package 0.1.8 and verify its registry checksum against the prepared archive.
+
 Source 0.1.8 passed 32 tests, including interrupted generation and retry. Generation and source upgrade safeguards exist. This wave adds macOS to CI and records the target runtime contract. Registry-generated consumer upgrades remain open.
 
 - [x] Reconcile current status with the GitHub source release and latest owner audit.
@@ -12,7 +14,7 @@ Source 0.1.8 passed 32 tests, including interrupted generation and retry. Genera
 npm run release:check passed 32 tests, format, metadata and a 21-file MIT package.
 
 - [x] Prepare isolated CI coverage for the target Windows/Linux/macOS runtime.
-- [ ] Verify this wave's exact GitHub CI results.
+- [x] Verify Windows/Linux/macOS CI: run 37202224447.
 
 Use projects/cxsun/agent/REMAINING-WORK.md for ordered cross-owner dependencies.
 Production deployment and real SMTP acceptance remain deferred. No pending external gate is marked complete.
@@ -37,8 +39,8 @@ Parents retain incomplete acceptance gates. Mail tests and production deployment
 
 - [ ] **02.05 Define generation and supported runtime contracts** - in-review. Owner: tools, template.
   - [x] 02.05.1 Explicit artifact manifest, tokens and overwrite policy implemented.
-  - [ ] 02.05.2 Accept Node/npm/OS matrix and upgrade behavior.
-  - [ ] 02.05.3 Verify Linux/macOS runtime matrix in CI.
+  - [x] 02.05.2 Accept Node 26.10/npm 12.2 on Windows, Linux and macOS; reject destination overwrite and document explicit migration.
+  - [x] 02.05.3 Verify Linux/macOS runtime matrix in CI (Tools run 37202224447).
 
 ### Phase 05 - Tools, guidance and delivery
 
