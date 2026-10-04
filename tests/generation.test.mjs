@@ -1,13 +1,22 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs";
+import {
+  mkdtempSync,
+  mkdirSync,
+  writeFileSync,
+  readFileSync,
+  existsSync,
+  rmSync,
+  realpathSync
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createApp } from "../src/generation.mjs";
 
 function fixture(t) {
-  const root = mkdtempSync(resolve(tmpdir(), "tools-generation-"));
+  // macOS exposes its temporary directory through a system symlink.
+  const root = realpathSync(mkdtempSync(resolve(tmpdir(), "tools-generation-")));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const source = resolve(root, "template");
   mkdirSync(source);

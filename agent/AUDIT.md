@@ -163,3 +163,7 @@ This delivery covers GitHub source. Npm publication, production deployment and r
 
 npm run release:check passed 32 tests, format, metadata and a 21-file MIT package.
 Authenticated MCP passed before work. New or expanded three-OS CI requires actual remote run evidence. Npm publication and deployed acceptance remain open.
+
+## macOS CI fixture correction - 2026-10-04
+
+The macOS generation tests used the system temporary-directory alias. Canonicalized the fixture root with realpathSync. The generator still rejects symlinked destination parents. Local release:check passes 32 tests. The replacement three-OS CI run is required before support acceptance.
