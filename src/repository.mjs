@@ -27,6 +27,7 @@ export function config(root) {
 export function sourceFiles(root) {
   const ignored = new Set([
     ".git",
+    ".worktrees",
     ".idea",
     ".vscode",
     ".vite",
@@ -79,7 +80,12 @@ export function readOptions(args) {
     "release",
     "name",
     "directory",
-    "archive-dir"
+    "archive-dir",
+    "source",
+    "destination",
+    "id",
+    "port",
+    "url"
   ]);
   const options = {};
   for (let index = 0; index < args.length; index++) {

@@ -2,11 +2,35 @@
 
 ## Version State
 
-Current version: 0.1.6
+Current version: 0.1.8
 
-Release tag: v-0.1.6
+Release tag: v-0.1.8
 
-Changelog label: v 0.1.6
+Changelog label: v 0.1.8
+
+## v-0.1.8
+
+### [v 0.1.8] 2026-10-04 5:00 pm - Deliver reusable application tooling
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Add safe application creation, artifact validation, interruption recovery, upgrade preservation and maintenance verification.
+
+## v-0.1.7
+
+### [v 0.1.7] 2026-10-03 10:41 am - Support standalone application maintenance
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Publish agent changelog support and npm package boundary compatibility for isolated applications.
 
 ## v-0.1.6
 
@@ -253,3 +277,9 @@ Changelog label: v 0.1.6
 
 - Enforced the cloud endpoint for direct client imports and validated instruction identity.
 - Extended cloud request timeouts to 15 seconds and verified all live resources and tools.
+
+## Shared package names — 2026-10-03
+
+- Recognize @devxcrew/core-framework and @devxcrew/react-ui in dependency ordering.
+- Treat core-framework as a backend package in frontend source boundary checks.
+- Updated maintenance tests passed: 21 tests. These source changes have not been published to npm.

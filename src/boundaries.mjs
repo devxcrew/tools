@@ -1,7 +1,7 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { createRequire } from "node:module";
 import { builtinModules } from "node:module";
-import { dirname, relative, resolve } from "node:path";
+import { dirname, relative, resolve, sep } from "node:path";
 import { config, readJson, sourceFiles } from "./repository.mjs";
 import { checkDependencyOrder } from "./dependency-order.mjs";
 
@@ -19,6 +19,7 @@ export function checkBoundaries(root) {
   const ts = require(settings.boundaries?.compilerPackage ?? "typescript");
   const roots = settings.boundaries?.sources ?? ["src"];
   const forbidden = settings.boundaries?.forbiddenPackages ?? ["@cxapp/"];
+  const checkedBrowserContracts = new Set();
   for (const file of sourceFiles(root)) {
     if (!/\.(ts|tsx)$/.test(file)) continue;
     const relativeFile = relative(root, file).replaceAll("\\", "/");
@@ -48,7 +49,10 @@ export function checkBoundaries(root) {
         (settings.boundaries?.frontendSources ?? []).some((source) =>
           relativeFile.startsWith(source + "/")
         ) &&
-        /^@(codexsun|devxcrew)\/(framework|platform|platform-core)(\/|$)/.test(specifier)
+        /^@(codexsun|devxcrew)\/(framework|core-framework|platform|platform-core)(\/|$)/.test(
+          specifier
+        ) &&
+        !browserContract(specifier, require, ts, checkedBrowserContracts)
       )
         throw new Error(`Backend package in frontend: ${relativeFile}`);
       if (
@@ -79,4 +83,56 @@ export function checkBoundaries(root) {
     }
   }
   console.info(`${manifest.name}: source dependencies passed.`);
+}
+
+function browserContract(specifier, require, ts, checked) {
+  if (specifier !== "@devxcrew/platform/identity/schemas") return false;
+  if (checked.has(specifier)) return true;
+  const entry = realpathSync(require.resolve(specifier));
+  const visited = new Set();
+  // Resolve through the export map first. Inspect the shipped JavaScript, not package claims.
+  function inspectFile(file) {
+    const actual = realpathSync(file);
+    if (visited.has(actual)) return;
+    visited.add(actual);
+    const ast = ts.createSourceFile(
+      actual,
+      readFileSync(actual, "utf8"),
+      ts.ScriptTarget.Latest,
+      true
+    );
+    function inspect(node) {
+      if ((ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) && node.moduleSpecifier) {
+        inspectImport(node.moduleSpecifier.text, actual);
+      }
+      if (
+        ts.isCallExpression(node) &&
+        (node.expression.kind === ts.SyntaxKind.ImportKeyword ||
+          node.expression.getText(ast) === "require")
+      ) {
+        if (!node.arguments[0] || !ts.isStringLiteral(node.arguments[0]))
+          throw new Error("Dynamic browser contract dependency.");
+        inspectImport(node.arguments[0].text, actual);
+      }
+      if (
+        ts.isIdentifier(node) &&
+        ["process", "Buffer", "__dirname", "__filename"].includes(node.text)
+      )
+        throw new Error("Node global in browser contract.");
+      ts.forEachChild(node, inspect);
+    }
+    inspect(ast);
+  }
+  function inspectImport(name, parent) {
+    if (name === "zod" || name.startsWith("zod/")) return;
+    if (!name.startsWith(".")) throw new Error(`Server dependency in browser contract: ${name}`);
+    const target = resolve(dirname(parent), name);
+    const packageRoot = entry.slice(0, entry.lastIndexOf(`${sep}dist${sep}`));
+    if (!packageRoot || !realpathSync(target).startsWith(packageRoot + sep))
+      throw new Error("Browser contract import leaves package.");
+    inspectFile(target);
+  }
+  inspectFile(entry);
+  checked.add(specifier);
+  return true;
 }

@@ -11,6 +11,8 @@ import { buildApp, devApp, initializeEnvironment } from "../src/app.mjs";
 import { checkDependencyOrder } from "../src/dependency-order.mjs";
 import { prepareContainer } from "../src/container.mjs";
 import { verifyClone } from "../src/clone.mjs";
+import { createApp } from "../src/generation.mjs";
+import { doctorApp } from "../src/doctor.mjs";
 
 try {
   const [command = "help", ...args] = process.argv.slice(2);
@@ -22,6 +24,12 @@ try {
     databaseUpdate: options["database-update"]
   };
   switch (command) {
+    case "app:create":
+      console.info(JSON.stringify(createApp(options), null, 2));
+      break;
+    case "app:doctor":
+      console.info(JSON.stringify(doctorApp(root), null, 2));
+      break;
     case "container:prepare":
       prepareContainer(root);
       break;
@@ -87,7 +95,7 @@ try {
       break;
     case "help":
       console.info(
-        "devxcrew-tools <build|pack|package:check|dependencies:check|dependencies:order|lines:check|lines:fix|version:show|version:bump|check:versions|changelog:append|github:now|app:build|app:dev|env:init|app:clone-check|container:prepare> [--root path] [--dry-run] [--title text] [--note text] [--database-update No|Yes] [--release patch|minor|major]"
+        "devxcrew-tools <app:create|app:doctor|build|pack|package:check|dependencies:check|dependencies:order|lines:check|lines:fix|version:show|version:bump|check:versions|changelog:append|github:now|app:build|app:dev|env:init|app:clone-check|container:prepare> [--root path] [--dry-run] [--title text] [--note text] [--database-update No|Yes] [--release patch|minor|major]"
       );
       break;
     default:
