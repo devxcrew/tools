@@ -189,7 +189,6 @@ Three-OS source CI passed: GitHub Actions run 37202224447 on Node 26.10.0 and np
 Source version: 0.1.9. Published package archives retain their existing versions.
 The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.
 
-
 ## Shared alignment audit - 2026-10-05
 
 Release checks (32 tests) and fresh source consumers passed. Source 0.1.9 remains unpublished.

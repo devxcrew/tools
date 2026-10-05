@@ -10,6 +10,16 @@ Changelog label: v 0.1.9
 
 ## v-0.1.9
 
+### [v 0.1.9] 2026-10-05 12:51 pm - Normalize audit record formatting
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Format alignment audit, task and changelog records to satisfy the repository CI formatting check.
+
 ### [v 0.1.9] 2026-10-05 12:46 pm - Record shared tooling consumer acceptance
 
 #### Database Changes
@@ -330,7 +340,6 @@ Changelog label: v 0.1.9
 
 Source version: 0.1.9. Published package archives retain their existing versions.
 The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.
-
 
 ## Unreleased alignment - 2026-10-05
 

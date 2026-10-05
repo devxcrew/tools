@@ -191,7 +191,6 @@ Two independent generated apps passed exact registry installation, application v
 Source version: 0.1.9. Published package archives retain their existing versions.
 The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.
 
-
 ## Shared alignment audit - 2026-10-05
 
 Release checks (32 tests) and fresh source consumers passed. Source 0.1.9 remains unpublished.
