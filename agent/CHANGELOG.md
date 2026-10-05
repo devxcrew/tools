@@ -366,3 +366,10 @@ The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.
 Release checks (32 tests) and fresh source consumers passed. Source 0.1.9 remains unpublished.
 
 Authenticated live MCP verification passed. See the [alignment audit](D:/codexsun/projects/cxsun/agent/SHARED-ALIGNMENT.md). Version numbers remain unchanged. No release delivery was performed by this audit.
+
+## Tools 0.1.9 delivery - 2026-10-05
+
+- Published @devxcrew/tools 0.1.9 with the latest tag.
+- Verified the registry checksum against the reviewed archive.
+- Pushed release commit fc3c49f. CI passed on Windows, Linux and macOS.
+- Release receipt: agent/RELEASE-0.1.9.json.

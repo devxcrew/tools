@@ -1,0 +1,21 @@
+{
+  "package": "@devxcrew/tools",
+  "version": "0.1.9",
+  "date": "2026-10-05",
+  "sourceCommit": "fc3c49fc2ba32bbf69d5f062bc8fa39caf560b5f",
+  "tag": "latest",
+  "archive": "dist/releases/devxcrew-tools-0.1.9.tgz",
+  "sha1": "58d2ed0ee6a18633f65261d28ee398fa52f3d4d1",
+  "integrity": "sha512-NofGGG32FWhhFVsfFWfImwZG7qCV38cRxqkCjkJJXI41Aow4omcf/9M2mhzr3Spa0PCjaOCpV2rYqvAhta/5+w==",
+  "checks": {
+    "tests": 32,
+    "failed": 0,
+    "format": "passed",
+    "versions": "passed",
+    "lineEndings": "passed",
+    "packageFiles": 21,
+    "ci": "Windows, Linux and macOS passed"
+  },
+  "publication": "published-and-checksum-verified",
+  "ciRun": "https://github.com/devxcrew/tools/actions/runs/37290916206"
+}

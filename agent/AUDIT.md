@@ -220,10 +220,13 @@ Tools source now defaults to restart; its next npm release remains separate.
 - [x] Review package names, dependency pins and app-owned port restart.
 - [x] Pass all 32 tests and release checks.
 - [x] Check npm identity and published version.
-- [ ] Commit and push the release.
-- [ ] Publish 0.1.9 under the npm latest tag and verify its checksum.
+- [x] Commit and push the release: fc3c49f.
+- [x] Publish 0.1.9 under the npm latest tag and verify its checksum.
 
 The user authorized commit, push and npm publication in this chat.
 Tools is a business-neutral CLI package. Canonical app module files do not apply to its maintenance utilities.
 Restart preflight checks all listener owners before stopping any process. Foreign listeners remain protected.
 The explicit abort policy remains available. Production startup does not reclaim ports.
+
+npm latest resolves to 0.1.9. Registry SHA-1 and SHA-512 match the reviewed archive.
+CI run 37290916206 passed on Windows, Linux and macOS.
