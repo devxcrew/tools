@@ -373,3 +373,10 @@ Authenticated live MCP verification passed. See the [alignment audit](D:/codexsu
 - Verified the registry checksum against the reviewed archive.
 - Pushed release commit fc3c49f. CI passed on Windows, Linux and macOS.
 - Release receipt: agent/RELEASE-0.1.9.json.
+
+## npm release verification - 2026-10-05
+
+- Verify latest package @devxcrew/tools 0.1.9 and registry archive checksums.
+- Verify a fresh five-package registry installation, public imports, TypeScript UI imports and Tools CLI.
+- Pass persisted SQLite migrations and reopen with Framework and Platform.
+- Production dependency audit reports zero vulnerabilities. SMTP and deployment remain deferred.

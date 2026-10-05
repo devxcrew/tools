@@ -4,6 +4,30 @@
   "sourceVersion": "0.1.9",
   "tests": 32,
   "releaseChecks": "passed",
-  "registryStatus": "verified-current",
-  "deferred": ["production deployment", "real SMTP delivery"]
+  "registryStatus": "latest-and-checksum-verified",
+  "deferred": ["production deployment", "real SMTP delivery"],
+  "registry": {
+    "version": "0.1.9",
+    "dist.shasum": "58d2ed0ee6a18633f65261d28ee398fa52f3d4d1",
+    "dist.integrity": "sha512-NofGGG32FWhhFVsfFWfImwZG7qCV38cRxqkCjkJJXI41Aow4omcf/9M2mhzr3Spa0PCjaOCpV2rYqvAhta/5+w=="
+  },
+  "artifactScope": "No environment files, test files, database files or node_modules",
+  "sourceCi": "passed",
+  "consumer": {
+    "installedVersion": "0.1.9",
+    "registryOnly": true,
+    "publicRuntimeImports": "passed",
+    "typescriptAndUiImports": "passed",
+    "toolsCli": "passed",
+    "sqlitePersistence": "passed in backend consumer",
+    "securityAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "evidence": "shared/tools/.cache-npm-consumer"
+  }
 }

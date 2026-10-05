@@ -235,8 +235,12 @@ CI run 37290916206 passed on Windows, Linux and macOS.
 
 - [x] Retrieve authenticated live governance.
 - [x] Review public exports, dependency ownership and release artifact scope.
-- [x] Run owner release checks.
-- [ ] Verify registry installation and the latest tag.
+- [x] Run owner release checks: 32 tests passed.
+- [x] Verify npm latest and archive checksums.
+- [x] Complete the isolated five-package consumer verification.
 
 Source version: 0.1.9. SMTP and deployment acceptance remain deferred.
 Tools 0.1.9 already matches its published archive and needs no republish.
+
+Registry-only installation of all five packages passed. Public runtime imports, TypeScript/React UI imports and the installed Tools CLI passed.
+Production dependency audit reports zero vulnerabilities. Full runtime deployment and real SMTP remain deferred.
