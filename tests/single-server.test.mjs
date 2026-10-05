@@ -18,7 +18,7 @@ test("single server preflight uses APP settings and checks one port", (t) => {
   );
   assert.deepEqual(devSettings(root), {
     endpoints: [{ host: "127.0.0.1", port: 5173 }],
-    policy: "abort"
+    policy: "restart"
   });
   writeFileSync(resolve(root, ".env"), "APP_URL=http://127.0.0.1:5174\nAPP_PORT=5173\n");
   assert.throws(() => devSettings(root), /APP_URL/);
@@ -36,7 +36,7 @@ test("preflight reads the configured env file and validates IPv6 and port policy
   writeFileSync(resolve(root, ".app.env"), "APP_URL=http://[::1]:5173\nAPP_PORT=5173\n");
   assert.deepEqual(devSettings(root), {
     endpoints: [{ host: "::1", port: 5173 }],
-    policy: "abort"
+    policy: "restart"
   });
   writeFileSync(
     resolve(root, ".app.env"),

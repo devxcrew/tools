@@ -10,6 +10,26 @@ Changelog label: v 0.1.9
 
 ## v-0.1.9
 
+### [v 0.1.9] 2026-10-05 3:03 pm - Release current package names and app-owned port restart
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Publish Tools 0.1.9 with current Framework and UI identifiers, pinned direct dependencies and default development restart. Review passed 32 tests, formatting, dependency order, metadata and package checks.
+
+### [v 0.1.9] 2026-10-05 2:39 pm - Require verified reserved-port development restart
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Wire restart policy, verify consecutive starts for five apps and require the same preflight lifecycle in new-app governance.
+
 ### [v 0.1.9] 2026-10-05 12:51 pm - Normalize audit record formatting
 
 #### Database Changes

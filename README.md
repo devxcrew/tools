@@ -65,3 +65,13 @@ Generation rejects an existing destination. Upgrade into an existing app is not 
 Generate into a new directory, review changes, and preserve app-owned modules during an explicit migration.
 Do not treat a source checkout run as acceptance of unpublished registry packages.
 The MIT license covers first-party code. Dependencies retain their own license terms.
+
+## Reserved development port restart
+
+Single-server development defaults to `restart`. Set `DEVXCREW_DEV_PORT_POLICY=restart`
+in app environment examples so existing installed Tools releases use the same policy.
+Preflight validates the configured host, app port and matching URL. It verifies
+process ownership before force-stopping the existing app supervisor and descendants.
+It waits for port release before startup. It preserves unrelated processes and
+never selects another port. An explicit `abort` policy disables reclaim.
+This policy applies to development only. Production startup keeps normal bind failure.

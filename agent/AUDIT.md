@@ -36,7 +36,7 @@ No publication, deployment, commit, or push occurred.
 
 - Shared package records do not imply an application login desk.
 
-## Cloud-only governance — 2026-10-03
+## Cloud-only governance â€” 2026-10-03
 
 - Passed: authenticated live instructions and required connection policy for this repository.
 - Passed: local MCP endpoint rejected with exit code 1. No local guide fallback.
@@ -44,7 +44,7 @@ No publication, deployment, commit, or push occurred.
 - Cxsun: two development connection tests passed, including no process start on connection failure.
 - Business features were not changed or tested. Source changes remain uncommitted.
 
-## Live connection audit — 2026-10-03
+## Live connection audit â€” 2026-10-03
 
 - Passed: this repository retrieves all five cloud guidance documents with its configured app identity.
 - Passed: environment secret files are ignored by Git.
@@ -59,7 +59,7 @@ No publication, deployment, commit, or push occurred.
 - App IDs identify caller context. The shared developer secret is not per-app authentication.
 - Long-term uptime and external editor configuration were not tested. Source changes remain uncommitted.
 
-## Live connection audit — 2026-10-03
+## Live connection audit â€” 2026-10-03
 
 - Passed: all six repositories retrieve five cloud guides with their configured app identities.
 - Passed: environment secret files are ignored by Git.
@@ -74,18 +74,18 @@ No publication, deployment, commit, or push occurred.
 - App IDs identify caller context. The shared developer secret is not per-app authentication.
 - Long-term uptime and external editor configuration were not tested. Source changes remain uncommitted.
 
-## Release 0.1.6 — 2026-10-03
+## Release 0.1.6 â€” 2026-10-03
 
 - Passed npm run release:check: 21 tests, dependency order, versions, LF, formatting, and npm package dry run.
 - Passed authenticated live MCP connection, release metadata, LF, and configured-secret scans.
 - Prepared commit subject: #6 - Require audited cloud MCP guidance.
 
-## Live MCP access audit — 2026-10-03
+## Live MCP access audit â€” 2026-10-03
 
 - GREEN: authenticated live connection, matching repository metadata, five guidance resources, and all three MCP tools.
 - Central evidence: shared/mcp-governance/docs/mcp-access-audit.md.
 
-## npm standalone release — 2026-10-03
+## npm standalone release â€” 2026-10-03
 
 - Published @devxcrew/tools@0.1.7 with user authorization and device authentication. Registry version and integrity were verified.
 - Release checks passed: 21 tests, formatting, versions, LF, and npm package dry run.
@@ -194,3 +194,36 @@ The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.
 Release checks (32 tests) and fresh source consumers passed. Source 0.1.9 remains unpublished.
 
 Authenticated live MCP verification passed. See the [alignment audit](D:/codexsun/projects/cxsun/agent/SHARED-ALIGNMENT.md). Version numbers remain unchanged. No release delivery was performed by this audit.
+
+## Reserved-port restart verification - 2026-10-05
+
+Development preflight uses `DEVXCREW_DEV_PORT_POLICY=restart`. Each app verifies
+its configured host, reserved port and URL, validates listener ownership, stops
+the existing app supervisor and descendants, waits for port release, then starts
+on the same port. Unrelated listeners are preserved. Production does not reclaim.
+
+Two actual starts passed for all five project apps on ports 5173 through 5177.
+Every second start replaced the listener PID and returned readiness 200 on the
+same port. Verification processes were stopped after each check.
+Tools release checks passed with 32 tests, including foreign-listener protection.
+Governance verification, cloud protocol checks and deployment dry run passed.
+
+Evidence: projects/cxsun/.cache/port-restart-results.json and port-restart-check.log,
+shared/tools/.cache-port-check.log, shared/mcp-governance/.cache-port-verify.log
+and .cache-port-cloud-check.log. App environment examples carry the explicit policy,
+so the currently published Tools 0.1.8 works without a sibling checkout.
+Tools source now defaults to restart; its next npm release remains separate.
+
+## Tools 0.1.9 release review - 2026-10-05
+
+- [x] Retrieve authenticated cloud governance.
+- [x] Review package names, dependency pins and app-owned port restart.
+- [x] Pass all 32 tests and release checks.
+- [x] Check npm identity and published version.
+- [ ] Commit and push the release.
+- [ ] Publish 0.1.9 under the npm latest tag and verify its checksum.
+
+The user authorized commit, push and npm publication in this chat.
+Tools is a business-neutral CLI package. Canonical app module files do not apply to its maintenance utilities.
+Restart preflight checks all listener owners before stopping any process. Foreign listeners remain protected.
+The explicit abort policy remains available. Production startup does not reclaim ports.

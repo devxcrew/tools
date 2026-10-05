@@ -19,7 +19,7 @@ export function devSettings(root) {
       Number(origin.port || (origin.protocol === "https:" ? 443 : 80)) !== endpoint.port
     )
       throw new Error("APP_URL must match APP_PORT.");
-    const policy = env.DEVXCREW_DEV_PORT_POLICY ?? "abort";
+    const policy = env.DEVXCREW_DEV_PORT_POLICY ?? "restart";
     if (!["restart", "abort"].includes(policy))
       throw new Error("Invalid DEVXCREW_DEV_PORT_POLICY.");
     return { endpoints: [endpoint], policy };
