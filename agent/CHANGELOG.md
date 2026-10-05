@@ -10,6 +10,16 @@ Changelog label: v 0.1.9
 
 ## v-0.1.9
 
+### [v 0.1.9] 2026-10-05 12:46 pm - Record shared tooling consumer acceptance
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Record 32 tests, release checks and current source consumer acceptance across the shared foundation.
+
 ### [v 0.1.9] 2026-10-05 8:38 am - Use current package names
 
 #### Database Changes
@@ -320,3 +330,10 @@ Changelog label: v 0.1.9
 
 Source version: 0.1.9. Published package archives retain their existing versions.
 The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.
+
+
+## Unreleased alignment - 2026-10-05
+
+Release checks (32 tests) and fresh source consumers passed. Source 0.1.9 remains unpublished.
+
+Authenticated live MCP verification passed. See the [alignment audit](D:/codexsun/projects/cxsun/agent/SHARED-ALIGNMENT.md). Version numbers remain unchanged. No release delivery was performed by this audit.
