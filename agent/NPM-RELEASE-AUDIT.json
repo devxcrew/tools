@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-05",
+  "package": "@devxcrew/tools",
+  "sourceVersion": "0.1.9",
+  "tests": 32,
+  "releaseChecks": "passed",
+  "registryStatus": "verified-current",
+  "deferred": ["production deployment", "real SMTP delivery"]
+}

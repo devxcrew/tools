@@ -232,3 +232,13 @@ The explicit abort policy remains available. Production startup does not reclaim
 
 npm latest resolves to 0.1.9. Registry SHA-1 and SHA-512 match the reviewed archive.
 CI run 37290916206 passed on Windows, Linux and macOS.
+
+## npm release audit - 2026-10-05
+
+- [x] Retrieve authenticated live governance.
+- [x] Review public exports, dependency ownership and release artifact scope.
+- [x] Run owner release checks.
+- [ ] Verify registry installation and the latest tag.
+
+Source version: 0.1.9. SMTP and deployment acceptance remain deferred.
+Tools 0.1.9 already matches its published archive and needs no republish.
