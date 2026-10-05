@@ -17,7 +17,7 @@ function fixture(t) {
   const manifest = {
     name: "@test/package",
     version: "1.0.80",
-    dependencies: { "@devxcrew/core-framework": "^1.0.80" },
+    dependencies: { "@devxcrew/framework": "^1.0.80" },
     exports: { ".": { types: "./dist/src/index.d.ts", import: "./dist/src/index.js" } }
   };
   writeFileSync(resolve(root, "package.json"), JSON.stringify(manifest));
@@ -45,7 +45,7 @@ test("version bump changes only this repository and preserves history and depend
   checkVersions(root);
   const manifest = JSON.parse(readFileSync(resolve(root, "package.json")));
   assert.equal(manifest.version, "1.0.81");
-  assert.equal(manifest.dependencies["@devxcrew/core-framework"], "^1.0.80");
+  assert.equal(manifest.dependencies["@devxcrew/framework"], "^1.0.80");
   assert(
     readFileSync(resolve(root, "assist/documentation/CHANGELOG.md"), "utf8").endsWith(original)
   );

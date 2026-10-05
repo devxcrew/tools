@@ -49,9 +49,7 @@ export function checkBoundaries(root) {
         (settings.boundaries?.frontendSources ?? []).some((source) =>
           relativeFile.startsWith(source + "/")
         ) &&
-        /^@(codexsun|devxcrew)\/(framework|core-framework|platform|platform-core)(\/|$)/.test(
-          specifier
-        ) &&
+        /^@(codexsun|devxcrew)\/(framework|platform|platform-core)(\/|$)/.test(specifier) &&
         !browserContract(specifier, require, ts, checkedBrowserContracts)
       )
         throw new Error(`Backend package in frontend: ${relativeFile}`);

@@ -2,11 +2,23 @@
 
 ## Version State
 
-Current version: 0.1.8
+Current version: 0.1.9
 
-Release tag: v-0.1.8
+Release tag: v-0.1.9
 
-Changelog label: v 0.1.8
+Changelog label: v 0.1.9
+
+## v-0.1.9
+
+### [v 0.1.9] 2026-10-05 8:38 am - Use current package names
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Remove superseded Framework and UI package names from maintenance checks and fixtures.
 
 ## v-0.1.8
 
@@ -288,6 +300,23 @@ Changelog label: v 0.1.8
 
 ## Shared package names — 2026-10-03
 
-- Recognize @devxcrew/core-framework and @devxcrew/react-ui in dependency ordering.
-- Treat core-framework as a backend package in frontend source boundary checks.
+- Recognize @devxcrew/framework and @devxcrew/ui in dependency ordering.
+- Treat framework as a backend package in frontend source boundary checks.
 - Updated maintenance tests passed: 21 tests. These source changes have not been published to npm.
+
+### Package reference cleanup - 2026-10-05
+
+- Remove superseded package identifiers from source, fixtures and current documents.
+- Current release receipts use verified registry checksums for Framework and UI.
+- Original publication records remain in Git history.
+- No test suite, publication or deployment ran in this cleanup.
+
+## Dependency alignment - 2026-10-05
+
+- [x] Align consumed shared packages and common direct dependency versions.
+- [x] Install dependencies with lifecycle scripts disabled.
+- [x] Keep app dependency ownership and public peer ranges.
+- [x] Exclude Veyrezio from this change.
+
+Source version: 0.1.9. Published package archives retain their existing versions.
+The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.

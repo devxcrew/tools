@@ -1,5 +1,14 @@
 # Verification evidence
 
+## Package reference cleanup - 2026-10-05
+
+- [x] Retrieve authenticated cloud governance.
+- [x] Remove superseded package identifiers from source, fixtures and current documents.
+- [x] Use Framework and UI names consistently.
+- [x] Scan repository files for remaining superseded identifiers.
+
+Static cleanup only. No test suite, publication or deployment ran in this step.
+
 ## Independent review - 2026-10-04
 
 Authenticated cloud connection passed before this review.
@@ -169,3 +178,13 @@ Authenticated MCP passed before work. New or expanded three-OS CI requires actua
 The macOS generation tests used the system temporary-directory alias. Canonicalized the fixture root with realpathSync. The generator still rejects symlinked destination parents. Local release:check passes 32 tests. The replacement three-OS CI run is required before support acceptance.
 
 Three-OS source CI passed: GitHub Actions run 37202224447 on Node 26.10.0 and npm 12.2.0.
+
+## Dependency alignment - 2026-10-05
+
+- [x] Align consumed shared packages and common direct dependency versions.
+- [x] Install dependencies with lifecycle scripts disabled.
+- [x] Keep app dependency ownership and public peer ranges.
+- [x] Exclude Veyrezio from this change.
+
+Source version: 0.1.9. Published package archives retain their existing versions.
+The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.

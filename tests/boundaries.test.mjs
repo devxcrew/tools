@@ -25,7 +25,7 @@ test("boundary parser rejects private sources, undeclared dependencies, dynamic 
     JSON.stringify({
       boundaries: {
         sources: ["src"],
-        forbiddenPackages: ["@devxcrew/core-framework"],
+        forbiddenPackages: ["@devxcrew/framework"],
         frontendSources: ["src"]
       }
     })
@@ -34,7 +34,7 @@ test("boundary parser rejects private sources, undeclared dependencies, dynamic 
   for (const [content, message] of [
     ['export * from "../../private-package/src/index.js";', /Private source/],
     ['import "undeclared-package";', /Undeclared runtime/],
-    ['const dependency = import("@devxcrew/core-framework/api");', /Backend package/]
+    ['const dependency = import("@devxcrew/framework/api");', /Backend package/]
   ]) {
     writeFileSync(source, content);
     assert.throws(() => checkBoundaries(root), message);

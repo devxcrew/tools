@@ -14,7 +14,7 @@ test("shared packages reject reverse edges, cycles and obsolete npm names", () =
   assert.throws(
     () =>
       checkDependencyOrder({
-        name: "@devxcrew/core-framework",
+        name: "@devxcrew/framework",
         devDependencies: { "@devxcrew/platform": "1.0.80" }
       }),
     /Reverse/
@@ -22,8 +22,8 @@ test("shared packages reject reverse edges, cycles and obsolete npm names", () =
   assert.throws(
     () =>
       checkDependencyOrder({
-        name: "@devxcrew/core-framework",
-        dependencies: { "@devxcrew/react-ui": "1.0.80" }
+        name: "@devxcrew/framework",
+        dependencies: { "@devxcrew/ui": "1.0.80" }
       }),
     /same-layer/
   );
@@ -39,7 +39,7 @@ test("shared packages reject reverse edges, cycles and obsolete npm names", () =
   );
   checkDependencyOrder({
     name: "@devxcrew/platform",
-    peerDependencies: { "@devxcrew/core-framework": "^1.0.80" },
+    peerDependencies: { "@devxcrew/framework": "^1.0.80" },
     devDependencies: { "@devxcrew/tools": "0.1.0" }
   });
   checkDependencyOrder({
@@ -53,7 +53,7 @@ test("Codexsun apps can opt into local shared packages", () => {
     {
       name: "@codexsun/cxsun",
       devDependencies: { "@devxcrew/tools": "file:../tools" },
-      dependencies: { "@devxcrew/react-ui": "file:../ui" }
+      dependencies: { "@devxcrew/ui": "file:../ui" }
     },
     { allowLocalPackages: true }
   );

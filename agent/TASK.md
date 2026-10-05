@@ -1,5 +1,14 @@
 # Current task
 
+## Package reference cleanup - 2026-10-05
+
+- [x] Retrieve authenticated cloud governance.
+- [x] Remove superseded package identifiers from source, fixtures and current documents.
+- [x] Use Framework and UI names consistently.
+- [x] Scan repository files for remaining superseded identifiers.
+
+Static cleanup only. No test suite, publication or deployment ran in this step.
+
 ## Completion wave - 2026-10-04
 
 - [x] Publish the approved MIT package 0.1.8 and verify its registry checksum against the prepared archive.
@@ -171,3 +180,13 @@ Preserve existing task history and incomplete acceptance gates.
 ## Registry consumer acceptance - 2026-10-04
 
 Two independent generated apps passed exact registry installation, application verification, module boundaries and live SQLite checks. Cross-app session denial passed. Cxsun three-OS CI passed in run 37204145628. See projects/cxsun/agent/GENERATED-CONSUMERS.json and RELEASE-PACKAGES.json. Browser acceptance and future version upgrade rehearsal remain separate.
+
+## Dependency alignment - 2026-10-05
+
+- [x] Align consumed shared packages and common direct dependency versions.
+- [x] Install dependencies with lifecycle scripts disabled.
+- [x] Keep app dependency ownership and public peer ranges.
+- [x] Exclude Veyrezio from this change.
+
+Source version: 0.1.9. Published package archives retain their existing versions.
+The baseline is recorded in projects/cxsun/agent/DEPENDENCY-BASELINE.json.

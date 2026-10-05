@@ -1,7 +1,5 @@
 const layers = new Map([
   ["@devxcrew/tools", 0],
-  ["@devxcrew/core-framework", 1],
-  ["@devxcrew/react-ui", 1],
   ["@devxcrew/platform", 2],
   ["@devxcrew/framework", 1],
   ["@devxcrew/ui", 1],

@@ -25,7 +25,7 @@ function fixture(t) {
     JSON.stringify({
       name: "{{APP_ID}}",
       version: "1.0.0",
-      dependencies: { "@devxcrew/core-framework": "0.1.7" }
+      dependencies: { "@devxcrew/framework": "0.1.7" }
     })
   );
   writeFileSync(
